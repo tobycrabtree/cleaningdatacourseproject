@@ -2,8 +2,11 @@ getting-and-cleaning-data
 =========================
 
 Getting and Cleaning Data
+
 Course Project
+
 Tobias Crabtree  
+
 June 2014
 
 Objective to create a tidy data set with the average of each variable for each activity and each subject using the data collected from the accelerometers from the Samsung Galaxy S smartphone. Data was downloaded June 2014 from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip.
