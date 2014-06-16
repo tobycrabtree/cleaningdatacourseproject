@@ -103,5 +103,5 @@ tidyDataMelt <- melt(tidyData, id=c("activity","subject"))
 names(tidyDataMelt) <- c("activity","subject","variable","mean")
 
 
-#### Create text file with tidy data set. 
+#### Create text file with tidy data set. The tidyData text file can be read into R as a dataframe with 14221 observations of 4 variables mentioned above for the 6 activities and 30 subjects.
 write.table(tidyDataMelt, file="tidyData.txt", quote=FALSE, row.names=FALSE)
