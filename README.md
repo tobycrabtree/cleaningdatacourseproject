@@ -11,27 +11,30 @@ June 2014
 
 Objective to create a tidy data set with the average of each variable for each activity and each subject using the data collected from the accelerometers from the Samsung Galaxy S smartphone. Data was downloaded June 2014 from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip.
 
-### use reshape2 package
+The following is the step-by-step instructions for creating the tidy data set in R. Headers in bold text indicate the activity performed on the data. The text indicates the R code.
+
+
+### Use reshape2 package
 library(reshape2) 
 
-### read the training set for X, Y, and subject
+### Read the training set for X, Y, and subject
 trainSetX <- read.table("./UCI HAR Dataset/train/X_train.txt", quote="") 
 
 trainSetY <- read.table("./UCI HAR Dataset/train/Y_train.txt", col.names="activity",quote="") 
 
 trainSetSubject <- read.table("./UCI HAR Dataset/train/subject_train.txt", col.names="subject", quote="") 
 
-### merge the training sets 
+### Merge the training sets 
 trainSet <- cbind(trainSetX, trainSetY, trainSetSubject) 
 
-### read the test set for X, Y, and subject
+### Read the test set for X, Y, and subject
 testSetX <- read.table("./UCI HAR Dataset/test/X_test.txt", quote="")
 
 testSetY <- read.table("./UCI HAR Dataset/test/Y_test.txt", col.names="activity", quote="")
 
 testSetSubject <- read.table("./UCI HAR Dataset/test/subject_test.txt", col.names="subject", quote="")
 
-### merge the test sets
+### Merge the test sets
 testSet <- cbind(testSetX, testSetY, testSetSubject) 
 
 ### Merge the training and test set
@@ -50,7 +53,7 @@ colMean <- grep("mean()", labels[,2])
 #### Select standard deviation measurements from the 561 variables
 colSD <- grep("std()", labels[,2]) 
 
-### create the extract set with mean and standard deviation measurements along with activity (column 562) and subject (column 563)
+### Create the extract set with mean and standard deviation measurements along with activity (column 562) and subject (column 563)
 extractSet <- subset(mergeSet, select=c(colMean, colSD, 562, 563)) 
 
 ### Use descriptive activity names to name the activities in the data set. Six activities were provided in the data set.
@@ -86,5 +89,5 @@ tidyDataMelt <- melt(tidyData, id=c("activity","subject"))
 ### Add the 4 variable names - activity, subject, variable, mean - to tidy data set
 names(tidyDataMelt) <- c("activity","subject","variable","mean")
 
-## Create text file with tidy data set. 
+### Create text file with tidy data set. 
 write.table(tidyDataMelt, file="tidyData.txt", quote=FALSE, row.names=FALSE)
